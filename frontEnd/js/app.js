@@ -1,6 +1,14 @@
-angular.module("myApp")
+angular.module("turicorApp")
 
-.controllers("myController", function($scope){
+.controllers("loginController", function($scope){
+
+
+})
+
+.controllers("vehiculoController", function($scope){
+
+})
+
+.controllers("reservaController", function($scope){
     
-
 })
