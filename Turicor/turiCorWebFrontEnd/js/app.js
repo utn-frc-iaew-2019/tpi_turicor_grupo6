@@ -1,9 +1,22 @@
 ﻿myApp = angular.module('myApp', []);
-myApp.controller('controller',
-    function ($scope) {
-        $scope.Titulo = "View: Vehículos Disponibles";
-        //$scope.Vehiculos = {Id: '5', Marca: 'CHEVROLET', Modelo: 'CORSA', Puntaje = '5', Puertas = '5', Disponibles = '100', Precio = '7800', Aire = 'SI', Direccion = 'Electrica', Cambio = 'Manual' };
 
+myApp.controller('vehiculosController', function ($scope) {
+    $scope.titulo = "HOLA JUANCARLOS"
+
+    $scope.vehiculos = [
+        {
+            'Id'          : '5',
+            'Marca'       : 'CHEVROLET',
+            'Modelo'      : 'CORSA',
+            'Puntaje'     : '5',
+            'Puertas'     : '5',
+            'Disponibles' : '100',
+            'Precio'      : '7800',
+            'Aire'        : 'SI',
+            'Direccion'   : 'Electrica',
+            'Cambio'      : 'Manual'
+        }
+    ];
 
     }
 );
