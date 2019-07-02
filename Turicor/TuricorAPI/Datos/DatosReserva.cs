@@ -14,6 +14,14 @@ namespace TuricorAPI.Datos
         private String contraseña = "nH74Xl1j8X";
 
 
+        public DatosReserva()
+        {
+            credenciales = new ServiceReferenceReservaVehiculos.Credentials();
+            cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
+            credenciales.UserName = usuario;
+            credenciales.Password = contraseña;
+        }
+
         public ServiceReferenceReservaVehiculos.ReservaEntity consultarReserva(string codigoReserva)
         {
             var request = new ServiceReferenceReservaVehiculos.ConsultarReservasRequest();
@@ -22,16 +30,16 @@ namespace TuricorAPI.Datos
             return respuesta.Reserva;
         }
 
-        public ServiceReferenceReservaVehiculos.ReservaEntity reservarVehiculo(Reserva reserva)
+        public ServiceReferenceReservaVehiculos.ReservaEntity reservarVehiculo(ReservaSOAP reserva)
         {
             var request = new ServiceReferenceReservaVehiculos.ReservarVehiculoRequest();
-            request.ApellidoNombreCliente = reserva.ApellidoNombreCliente;
-            request.FechaHoraDevolucion = reserva.FechaHoraDevolucion;
-            request.FechaHoraRetiro = reserva.FechaHoraRetiro;
-            request.IdVehiculoCiudad = reserva.IdVehiculoCiudad;
-            request.LugarDevolucion = reserva.LugarDevolucion;
-            request.LugarRetiro = reserva.LugarRetiro;
-            request.NroDocumentoCliente = reserva.NroDocumentoCliente;
+            request.ApellidoNombreCliente = reserva.getApellidoNombreCliente();
+            request.FechaHoraDevolucion = reserva.getFechaHoraDevolucion();
+            request.FechaHoraRetiro = reserva.getFechaHoraRetiro();
+            request.IdVehiculoCiudad = reserva.getIdVehiculoCiudad();
+            request.LugarDevolucion = reserva.getLugarDevolucion();
+            request.LugarRetiro = reserva.getLugarRetiro();
+            request.NroDocumentoCliente = reserva.getNroDocumentoCliente();
             var respuesta = cliente.ReservarVehiculo(credenciales, request);
             return respuesta.Reserva;
 

@@ -14,6 +14,8 @@ namespace TuricorAPI.Datos
 
         public DatosVehiculos()
         {
+            credenciales = new ServiceReferenceReservaVehiculos.Credentials();
+            cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
             credenciales.UserName = usuario;
             credenciales.Password = contraseña;
         }
