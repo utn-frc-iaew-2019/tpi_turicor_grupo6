@@ -194,7 +194,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaisesController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="Controllers\VehiculoController.cs" />
+    <Compile Include="Controllers\VehiculosController.cs" />
     <Compile Include="Datos\DatosPaises.cs" />
     <Compile Include="Datos\DatosReserva.cs" />
     <Compile Include="Datos\DatosVehiculos.cs" />
