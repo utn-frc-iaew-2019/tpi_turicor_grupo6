@@ -45,6 +45,12 @@ namespace TuricorAPI.Datos
 
         }
 
+        public ServiceReferenceReservaVehiculos.ReservaEntity cancelarReserva(ReservaSOAP reserva)
+        {
+            var request = new ServiceReferenceReservaVehiculos.CancelarReservaRequest();
+            request.CodigoReserva = reserva.get
+        }
+
 
     }
 }
