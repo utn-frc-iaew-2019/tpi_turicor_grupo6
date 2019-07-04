@@ -14,6 +14,7 @@
     <EntitySetMapping Name="Reservas">
       <EntityTypeMapping TypeName="TuricorModel.Reserva">
         <MappingFragment StoreEntitySet="Reserva">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CodigoReserva" ColumnName="CodigoReserva" />
           <ScalarProperty Name="FechaReserva" ColumnName="FechaReserva" />

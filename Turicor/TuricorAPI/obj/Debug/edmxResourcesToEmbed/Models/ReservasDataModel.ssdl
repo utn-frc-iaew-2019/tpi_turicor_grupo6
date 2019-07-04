@@ -5,8 +5,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="Nombre" Type="nchar" MaxLength="10" />
-    <Property Name="Apellido" Type="nchar" MaxLength="10" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Apellido" Type="varchar" MaxLength="50" />
     <Property Name="NroDocumento" Type="int" />
   </EntityType>
   <EntityType Name="Reserva">
@@ -14,22 +14,23 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="CodigoReserva" Type="int" />
+    <Property Name="CodigoReserva" Type="varchar" MaxLength="50" />
     <Property Name="FechaReserva" Type="date" />
     <Property Name="IdCliente" Type="int" />
     <Property Name="IdVendedor" Type="int" />
-    <Property Name="Costo" Type="float" />
-    <Property Name="PrecioVenta" Type="float" />
+    <Property Name="Costo" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="PrecioVenta" Type="decimal" Precision="18" Scale="0" />
     <Property Name="IdVehiculoCiudad" Type="int" />
     <Property Name="IdCiudad" Type="int" />
     <Property Name="IdPais" Type="int" />
+    <Property Name="Estado" Type="int" />
   </EntityType>
   <EntityType Name="Vendedor">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="Nombre" Type="nchar" MaxLength="10" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
   </EntityType>
   <Association Name="FK_Reserva_Cliente">
     <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />

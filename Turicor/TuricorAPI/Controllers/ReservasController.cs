@@ -47,26 +47,28 @@ namespace TuricorAPI.Controllers
 
         // PUT: api/Reservas/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutReserva(ServiceReferenceReservaVehiculos.ReservaEntity reservaSOAP)
+        public IHttpActionResult PutReserva(ServiceReferenceReservaVehiculos.ReservaEntity reserva)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            Reserva reserva = new Reserva();
-            reserva.CodigoReserva = reservaSOAP.CodigoReserva;
-            reserva.Costo = reservaSOAP.TotalReserva;
-            reserva.FechaReserva = reservaSOAP.FechaReserva;
-            reserva.Id = reservaSOAP.Id;
-            reserva.IdCiudad = db.Reservas.Find(reservaSOAP.Id).IdCiudad;
-            reserva.IdCliente = db.Reservas.Find(reservaSOAP.Id).IdCliente;
-            reserva.IdPais = db.Reservas.Find(reservaSOAP.Id).IdPais;
-            reserva.IdVehiculoCiudad = reservaSOAP.VehiculoPorCiudadId;
-            reserva.IdVendedor = db.Reservas.Find(reservaSOAP.Id).IdVendedor;
-            reserva.PrecioVenta = db.Reservas.Find(reservaSOAP.Id).PrecioVenta;
-            reserva.Estado = 0;
-            db.Entry(reserva).State = EntityState.Modified;
+            Reserva reservaModificada = new Reserva();
+            reservaModificada.CodigoReserva = reserva.CodigoReserva;
+            reservaModificada.Costo = reserva.TotalReserva;
+            reservaModificada.FechaReserva = reserva.FechaReserva;
+            reservaModificada.Id = reserva.Id;
+            reservaModificada.IdCiudad = db.Reservas.Find(reserva.Id).IdCiudad;
+            reservaModificada.IdCliente = db.Reservas.Find(reserva.Id).IdCliente;
+            reservaModificada.IdPais = db.Reservas.Find(reserva.Id).IdPais;
+            reservaModificada.IdVehiculoCiudad = reserva.VehiculoPorCiudadId;
+            reservaModificada.IdVendedor = db.Reservas.Find(reserva.Id).IdVendedor;
+            reservaModificada.PrecioVenta = db.Reservas.Find(reserva.Id).PrecioVenta;
+            reservaModificada.Estado = 0;
+            reservaModificada.Cliente = db.Reservas.Find(reserva.Id).Cliente;
+            reservaModificada.Vendedor = db.Reservas.Find(reserva.Id).Vendedor;
+            db.Entry(reservaModificada).State = EntityState.Modified;
 
             try
             {
@@ -74,7 +76,7 @@ namespace TuricorAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ReservaExists(reservaSOAP.CodigoReserva))
+                if (!ReservaExists(reserva.CodigoReserva))
                 {
                     return NotFound();
                 }
@@ -84,10 +86,14 @@ namespace TuricorAPI.Controllers
                 }
             }
 
+
+            var datosReserva = new DatosReserva();
+            var reservaSOAP = new ReservaSOAP(reserva);
+            datosReserva.cancelarReserva(reservaSOAP);
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        /*// POST: api/Reservas
+        // POST: api/Reservas
         [ResponseType(typeof(Reserva))]
         public IHttpActionResult PostReserva(ServiceReferenceReservaVehiculos.ReservaEntity reserva)
         {
@@ -96,7 +102,14 @@ namespace TuricorAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Reservas.Add(reserva);
+            //var reservaNueva = new Reserva();
+            //reservaNueva.Cliente = reserva.ApellidoNombreCliente;
+
+            //db.Reservas.Add(reserva);
+
+            var datosReserva = new DatosReserva();
+            var reservaSOAP = new ReservaSOAP(reserva);
+            datosReserva.reservarVehiculo(reservaSOAP);
 
             try
             {
@@ -115,7 +128,7 @@ namespace TuricorAPI.Controllers
             }
 
             return CreatedAtRoute("DefaultApi", new { id = reserva.Id }, reserva);
-        }*/
+        }
 
         protected override void Dispose(bool disposing)
         {

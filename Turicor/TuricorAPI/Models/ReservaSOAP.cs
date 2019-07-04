@@ -12,19 +12,21 @@ namespace TuricorAPI.Models
         private DateTime fechaHoraDevolucion;
         private DateTime fechaHoraRetiro;
         private int idVehiculoCiudad;
-        private ServiceReferenceReservaVehiculos.LugarRetiroDevolucion lugarDevolucion;
-        private ServiceReferenceReservaVehiculos.LugarRetiroDevolucion lugarRetiro;
+        private string lugarDevolucion;
+        private string lugarRetiro;
         private string nroDocumentoCliente;
+        private string codigoReserva;
 
-        public ReservaSOAP(string apellidoNombreCliente, DateTime fechaHoraDevolucion, DateTime fechaHoraRetiro, int idVehiculoCiudad, LugarRetiroDevolucion lugarDevolucion, LugarRetiroDevolucion lugarRetiro, string nroDocumentoCliente)
+        public ReservaSOAP(ServiceReferenceReservaVehiculos.ReservaEntity reserva)
         {
-            this.apellidoNombreCliente = apellidoNombreCliente;
-            this.fechaHoraDevolucion = fechaHoraDevolucion;
-            this.fechaHoraRetiro = fechaHoraRetiro;
-            this.idVehiculoCiudad = idVehiculoCiudad;
-            this.lugarDevolucion = lugarDevolucion;
-            this.lugarRetiro = lugarRetiro;
-            this.nroDocumentoCliente = nroDocumentoCliente;
+            this.apellidoNombreCliente = reserva.ApellidoNombreCliente;
+            this.fechaHoraDevolucion = reserva.FechaHoraDevolucion;
+            this.fechaHoraRetiro = reserva.FechaHoraRetiro;
+            this.idVehiculoCiudad = reserva.VehiculoPorCiudadId;
+            this.lugarDevolucion = reserva.LugarDevolucion;
+            this.lugarRetiro = reserva.LugarRetiro;
+            this.nroDocumentoCliente = reserva.NroDocumentoCliente;
+            this.codigoReserva = reserva.CodigoReserva;
         }
 
         public string getApellidoNombreCliente()
@@ -43,17 +45,22 @@ namespace TuricorAPI.Models
         {
             return this.idVehiculoCiudad;
         } 
-        public LugarRetiroDevolucion getLugarDevolucion()
+        public string getLugarDevolucion()
         {
             return this.lugarDevolucion;
         }
-        public LugarRetiroDevolucion getLugarRetiro()
+        public string getLugarRetiro()
         {
             return this.lugarRetiro;
         }
         public string getNroDocumentoCliente()
         {
             return this.nroDocumentoCliente;
+        }
+        
+        public string getCodigoReserva()
+        {
+            return this.codigoReserva;
         }
     }
 }

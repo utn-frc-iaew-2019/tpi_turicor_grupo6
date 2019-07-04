@@ -37,8 +37,8 @@ namespace TuricorAPI.Datos
             request.FechaHoraDevolucion = reserva.getFechaHoraDevolucion();
             request.FechaHoraRetiro = reserva.getFechaHoraRetiro();
             request.IdVehiculoCiudad = reserva.getIdVehiculoCiudad();
-            request.LugarDevolucion = reserva.getLugarDevolucion();
-            request.LugarRetiro = reserva.getLugarRetiro();
+            request.LugarDevolucion = this.lugarEnum(reserva.getLugarDevolucion());
+            request.LugarRetiro = this.lugarEnum(reserva.getLugarRetiro());
             request.NroDocumentoCliente = reserva.getNroDocumentoCliente();
             var respuesta = cliente.ReservarVehiculo(credenciales, request);
             return respuesta.Reserva;
@@ -48,9 +48,30 @@ namespace TuricorAPI.Datos
         public ServiceReferenceReservaVehiculos.ReservaEntity cancelarReserva(ReservaSOAP reserva)
         {
             var request = new ServiceReferenceReservaVehiculos.CancelarReservaRequest();
-            request.CodigoReserva = reserva.get
+            request.CodigoReserva = reserva.getCodigoReserva();
+            var respuesta = cliente.CancelarReserva(credenciales, request);
+            return respuesta.Reserva;
         }
 
+        
+        
+
+        private ServiceReferenceReservaVehiculos.LugarRetiroDevolucion lugarEnum(string lugar)
+        {
+            switch (lugar)
+            {
+                case "Aeropuerto":
+                    return ServiceReferenceReservaVehiculos.LugarRetiroDevolucion.Aeropuerto;
+                case "Hotel":
+                    return ServiceReferenceReservaVehiculos.LugarRetiroDevolucion.Hotel;
+                case "TerminalBuses":
+                    return ServiceReferenceReservaVehiculos.LugarRetiroDevolucion.TerminalBuses;
+                default:
+                    return ServiceReferenceReservaVehiculos.LugarRetiroDevolucion.Hotel;
+            }
+
+
+        }
 
     }
 }

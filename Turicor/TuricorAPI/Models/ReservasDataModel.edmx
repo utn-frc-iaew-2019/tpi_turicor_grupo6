@@ -4,14 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TuricorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TuricorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cliente">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Nombre" Type="nchar" MaxLength="10" />
-          <Property Name="Apellido" Type="nchar" MaxLength="10" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Apellido" Type="varchar" MaxLength="50" />
           <Property Name="NroDocumento" Type="int" />
         </EntityType>
         <EntityType Name="Reserva">
@@ -19,22 +19,23 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="CodigoReserva" Type="int" />
+          <Property Name="CodigoReserva" Type="varchar" MaxLength="50" />
           <Property Name="FechaReserva" Type="date" />
           <Property Name="IdCliente" Type="int" />
           <Property Name="IdVendedor" Type="int" />
-          <Property Name="Costo" Type="float" />
-          <Property Name="PrecioVenta" Type="float" />
+          <Property Name="Costo" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PrecioVenta" Type="decimal" Precision="18" Scale="0" />
           <Property Name="IdVehiculoCiudad" Type="int" />
           <Property Name="IdCiudad" Type="int" />
           <Property Name="IdPais" Type="int" />
+          <Property Name="Estado" Type="int" />
         </EntityType>
         <EntityType Name="Vendedor">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Nombre" Type="nchar" MaxLength="10" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_Reserva_Cliente">
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
@@ -73,8 +74,7 @@
             <End Role="Reserva" EntitySet="Reserva" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TuricorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -83,8 +83,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Apellido" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NroDocumento" Type="Int32" />
           <NavigationProperty Name="Reservas" Relationship="Self.FK_Reserva_Cliente" FromRole="Cliente" ToRole="Reserva" />
         </EntityType>
@@ -93,12 +93,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="CodigoReserva" Type="String" />
+          <Property Name="CodigoReserva" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="FechaReserva" Type="DateTime" Precision="0" />
           <Property Name="IdCliente" Type="Int32" />
           <Property Name="IdVendedor" Type="Int32" />
-          <Property Name="Costo" Type="Decimal" />
-          <Property Name="PrecioVenta" Type="Decimal" />
+          <Property Name="Costo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PrecioVenta" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IdVehiculoCiudad" Type="Int32" />
           <Property Name="IdCiudad" Type="Int32" />
           <Property Name="IdPais" Type="Int32" />
@@ -111,7 +111,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Reservas" Relationship="Self.FK_Reserva_Vendedor" FromRole="Vendedor" ToRole="Reserva" />
         </EntityType>
         <Association Name="FK_Reserva_Cliente">
@@ -170,6 +170,7 @@
           <EntitySetMapping Name="Reservas">
             <EntityTypeMapping TypeName="TuricorModel.Reserva">
               <MappingFragment StoreEntitySet="Reserva">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CodigoReserva" ColumnName="CodigoReserva" />
                 <ScalarProperty Name="FechaReserva" ColumnName="FechaReserva" />
