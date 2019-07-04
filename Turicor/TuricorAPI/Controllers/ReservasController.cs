@@ -116,8 +116,9 @@ namespace TuricorAPI.Controllers
                 db.SaveChanges();
             }
             catch (DbUpdateException)
+           
             {
-                if (ReservaExists(reserva.Id))
+                if (ReservaExists(reserva.Id.ToString()))
                 {
                     return Conflict();
                 }

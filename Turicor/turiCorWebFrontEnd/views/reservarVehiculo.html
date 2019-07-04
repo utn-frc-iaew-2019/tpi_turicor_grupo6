@@ -7,11 +7,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link href="../style/style.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
-    <script src="js/app.js"></script>
+    <script src="../js/app.js"></script>
     <meta charset="utf-8" />
     <title></title>
 </head>
-<body ng-app="myApp" ng-controller="reservarVehiculoController">
+
+<body ng-app="myApp" ng-controller="reservarVehiculosController">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="index.html">Turicor</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,26 +49,22 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputFechaRetiro">Fecha de Retiro</label>
-                    <input type="date" class="form-control" id="inputFechaRetiro" placeholder="Dia/Mes/Año">
+                    <input type="datetime" class="form-control" id="inputFechaRetiro" placeholder="Dia/Mes/Año" ng-model="fechaRetiro">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="inputFechaRetiro">Fecha Retiro</label>
-                    <input type="date" class="form-control" id="inputFechaRetiro" placeholder="Dia/Mes/Año">
+                    <label for="inputoFechaDevolucion">Fecha Devolucion</label>
+                    <input type="datetime" class="form-control" id="inputFechaDevolucion" placeholder="Dia/Mes/Año" ng-model="fechaDevolucion">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="inputLugarRetiro">Ciudad de retiro</label>
-                    <select id="inputState" class="form-control">
-                        <option selected>CORDOBA</option>
-                        <option>ROSARIO</option>
+                    <label for="inputLugarRetiro">Lugar Retiro</label>
+                    <select id="inputLugarRetiro" class="form-control" ng-model="lugarRetiroSelected" ng-options="lugar.Nombre for lugar in lugares">
                     </select>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="inputLugarDevolucion">Ciudad de devolución</label>
-                    <select id="inputLugarDevolucion" class="form-control">
-                        <option selected>LA PAMPA</option>
-                        <option>MENDOZA</option>
+                    <label for="inputLugarDevolucion">Lugar Devolución</label>
+                    <select id="inputLugarDevolucion" class="form-control" ng-model="lugarDevolucionSelected" ng-options="lugar.Nombre for lugar in lugares">
                     </select>
                 </div>
             </div>
@@ -89,21 +86,20 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputPais">Pais</label>
-                    <select id="inputState" class="form-control">
-                        <option selected>Argentina</option>
-                        <option>Brasil</option>
+                    <select id="inputState" class="form-control" ng-model="paisSelected" ng-options="pais.Nombre for pais in paises" ng-change="buscarCiudades(paisSelected.Id)">
                     </select>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputCiudad">Ciudad</label>
-                    <select id="inputState" class="form-control">
-                        <option selected>Buenos Aires</option>
-                        <option>Cordoba</option>
+                    <select id="inputState" class="form-control" ng-model="ciudadSelected" ng-options="ciudad.Nombre for ciudad in ciudadesPais">
                     </select>
                 </div>
             </div>
+            <br />
             <div class="form-group">
-                <label for="inputVehiculo">Vehiculo</label>                
+                <button type="submit" class="btn btn-primary" ng-click="buscarVehiculos(ciudadSelected.Id, fechaRetiro, fechaDevolucion)">Cargar Vehiculos Disponibles</button> <br />
+          
+                <label for="inputVehiculo">Vehiculo</label>
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
@@ -117,38 +113,29 @@
                             <th scope="col">Aire Acond</th>
                             <th scope="col">Direccion</th>
                             <th scope="col">Tipo de Cambio</th>
+                            <th scope="col">Seleccion</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
+                        <tr ng-repeat="vehiculo in vehiculos">
+                            <td scope="row" 1> {{vehiculo.Id}}</td>
+                            <td>{{vehiculo.Marca}}</td>
+                            <td>{{vehiculo.Modelo}}</td>
+                            <td>{{vehiculo.Puntaje}}</td>
+                            <td>{{vehiculo.CantidadPuertas}}</td>
+                            <td>{{vehiculo.CantidadDisponible}}</td>
+                            <td>{{vehiculo.PrecioPorDia}}</td>
+                            <td>{{vehiculo.TieneAireAcon}}</td>
+                            <td>{{vehiculo.TieneDireccion}}</td>
+                            <td>{{vehiculo.TipoCambio}}</td>
+                            <td>
+                                <input type="radio" name="optradio" value="{{vehiculo}}">
+                            </td>
                         </tr>
                     </tbody>
-                </table>
+                </table>    
             </div>
-            <button type="submit" class="btn btn-primary">Reservar</button>
+            <button type="submit" class="btn btn-primary" ng-click="printVehiculo(vehiculo)">Reservar</button>
         </form>
     </div>
 

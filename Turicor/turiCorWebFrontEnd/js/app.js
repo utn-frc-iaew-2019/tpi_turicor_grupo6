@@ -1,25 +1,52 @@
 ﻿myApp = angular.module('myApp', []);
 
-myApp.controller('vehiculosController', function ($scope) {
-    $scope.titulo = "HOLA JUANCARLOS"
-
-    $scope.vehiculos = [
-        {
-            'Id'          : '5',
-            'Marca'       : 'CHEVROLET',
-            'Modelo'      : 'CORSA',
-            'Puntaje'     : '5',
-            'Puertas'     : '5',
-            'Disponibles' : '100',
-            'Precio'      : '7800',
-            'Aire'        : 'SI',
-            'Direccion'   : 'Electrica',
-            'Cambio'      : 'Manual'
+myApp.controller('reservarVehiculosController', function ($scope, $http) {
+    $scope.paises = [];
+    $scope.ciudadesPais = [];
+    $scope.lugares = [{ 'Id': '1', 'Nombre': 'Aeropuerto' }, { 'Id': '2', 'Nombre': 'TerminalBuses' }, { 'Id': '3', 'Nombre': 'Hotel' }]
+    $scope.vehiculos = [];
+    $http({
+        method: 'GET',
+        url: 'http://localhost:50246/api/paises',
+        Headers : {
+            'content-type' : 'application/json; charset=utf-8'
         }
-    ];
+    }).then(function (response) {
+        $scope.paises = response.data.$values;
+        })
+
+    $scope.buscarCiudades = function (idPais) {
+        $http({
+            method: 'GET',
+            url: 'http://localhost:50246/api/ciudades/' + idPais, 
+            Headers: {
+                'content-type' : 'application/json; charset=utf-8'
+            }
+        }).then(function (response) {
+            $scope.ciudadesPais = response.data.$values;
+        })
+    }
+
+    $scope.buscarVehiculos = function (idCiudad, fechaRetiro, fechaDevolucion) {
+        $http({
+            method: 'GET',
+            url: 'http://localhost:50246/api/vehiculos' +'?idCiudad='+idCiudad+'&fechaRetiro='+fechaRetiro+'&fechaDevolucion='+fechaDevolucion,
+        }).then(function (response) {
+            $scope.vehiculos = response.data.$values;
+        })
+    }
+
+    $scope.printVehiculo = function (vehiculo) {
+        console.log(vehiculo);
 
     }
-);
+
+
+
+
+
+})
+
 
 /*myApp = angular.module('myApp', []);
 myApp.controller('VehiculosDispController',
