@@ -41,7 +41,7 @@ namespace TuricorAPI.Controllers
         public ServiceReferenceReservaVehiculos.ReservaEntity GetReserva(string codigoReserva)
         {
             var datosReserva = new DatosReserva();
-            return datosReserva.consultarReserva(codigoReserva);           
+            return datosReserva.consultarReserva(codigoReserva);
         }
 
 
@@ -89,27 +89,52 @@ namespace TuricorAPI.Controllers
 
             var datosReserva = new DatosReserva();
             var reservaSOAP = new ReservaSOAP(reserva);
-            datosReserva.cancelarReserva(reservaSOAP);
+            ServiceReferenceReservaVehiculos.ReservaEntity reservaCancelada = datosReserva.cancelarReserva(reservaSOAP);
             return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/Reservas
         [ResponseType(typeof(Reserva))]
-        public IHttpActionResult PostReserva(ServiceReferenceReservaVehiculos.ReservaEntity reserva)
+        public IHttpActionResult PostReserva(ServiceReferenceReservaVehiculos.ReservaEntity reserva, int idCiudad, int idPais, int idVendedor)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            //var reservaNueva = new Reserva();
-            //reservaNueva.Cliente = reserva.ApellidoNombreCliente;
-
-            //db.Reservas.Add(reserva);
-
             var datosReserva = new DatosReserva();
             var reservaSOAP = new ReservaSOAP(reserva);
-            datosReserva.reservarVehiculo(reservaSOAP);
+            ServiceReferenceReservaVehiculos.ReservaEntity reservaCreada = datosReserva.reservarVehiculo(reservaSOAP);
+
+            var reservaNueva = new Reserva();
+            if (this.ClienteExistsByDNI(int.Parse(reserva.NroDocumentoCliente)))
+            {
+                reservaNueva.Cliente = this.GetCliente(int.Parse(reserva.NroDocumentoCliente));
+            }
+            else {
+                var clienteNuevo = new Cliente();
+                clienteNuevo.Apellido = reserva.ApellidoNombreCliente.Split(',')[0];
+                clienteNuevo.Nombre = reserva.ApellidoNombreCliente.Split(',')[1];
+                clienteNuevo.NroDocumento = int.Parse(reserva.NroDocumentoCliente);
+                db.Clientes.Add(clienteNuevo);
+            }
+            
+
+            reservaNueva.CodigoReserva = reservaCreada.CodigoReserva;
+            reservaNueva.Costo = reserva.TotalReserva;
+            reservaNueva.Estado = 1;
+            reservaNueva.FechaReserva = reservaCreada.FechaReserva;
+            reservaNueva.IdCiudad = idCiudad;
+            reservaNueva.IdCliente = int.Parse(reserva.NroDocumentoCliente);
+            reservaNueva.IdPais = idPais;
+            reservaNueva.IdVehiculoCiudad = reservaCreada.VehiculoPorCiudadId;
+            reservaNueva.IdVendedor = idVendedor;
+            reservaNueva.PrecioVenta = reserva.TotalReserva * (decimal) 1.2;
+            reservaNueva.Vendedor = GetVendedor(idVendedor);
+
+
+            db.Reservas.Add(reservaNueva);
+
+            
 
             try
             {
@@ -118,7 +143,11 @@ namespace TuricorAPI.Controllers
             catch (DbUpdateException)
            
             {
+<<<<<<< HEAD
                 if (ReservaExists(reserva.Id.ToString()))
+=======
+                if (ReservaExists(reserva.CodigoReserva))
+>>>>>>> 54b27c3bcc656d73c62c84ea4c41819237e7cac7
                 {
                     return Conflict();
                 }
@@ -143,6 +172,21 @@ namespace TuricorAPI.Controllers
         private bool ReservaExists(string codigoReserva)
         {
             return db.Reservas.Find(codigoReserva) != null;
+        }
+
+        private bool ClienteExistsByDNI(int dni)
+        {
+            return db.Clientes.Where(n => n.NroDocumento == dni) != null;
+        }
+
+        private Cliente GetCliente(int dni)
+        {
+            return db.Clientes.Where(n => n.NroDocumento == dni).First();
+        }
+
+        private Vendedor GetVendedor(int id)
+        {
+            return db.Vendedors.Find(id);
         }
     }
 }
