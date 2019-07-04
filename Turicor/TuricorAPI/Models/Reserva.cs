@@ -24,7 +24,7 @@ namespace TuricorAPI.Models
         public Nullable<int> IdVehiculoCiudad { get; set; }
         public Nullable<int> IdCiudad { get; set; }
         public Nullable<int> IdPais { get; set; }
-        public int Estado { get; set; }
+        public Nullable<int> Estado { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         public virtual Vendedor Vendedor { get; set; }

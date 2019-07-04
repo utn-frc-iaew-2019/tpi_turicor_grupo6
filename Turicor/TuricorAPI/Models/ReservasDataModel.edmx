@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
           <Property Name="Apellido" Type="varchar" MaxLength="50" />
           <Property Name="NroDocumento" Type="int" />
@@ -18,7 +18,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CodigoReserva" Type="varchar" MaxLength="50" />
           <Property Name="FechaReserva" Type="date" />
           <Property Name="IdCliente" Type="int" />
@@ -34,7 +34,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_Reserva_Cliente">
@@ -104,7 +104,7 @@
           <Property Name="IdPais" Type="Int32" />
           <NavigationProperty Name="Cliente" Relationship="Self.FK_Reserva_Cliente" FromRole="Reserva" ToRole="Cliente" />
           <NavigationProperty Name="Vendedor" Relationship="Self.FK_Reserva_Vendedor" FromRole="Reserva" ToRole="Vendedor" />
-          <Property Name="Estado" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="Int32" />
         </EntityType>
         <EntityType Name="Vendedor">
           <Key>
