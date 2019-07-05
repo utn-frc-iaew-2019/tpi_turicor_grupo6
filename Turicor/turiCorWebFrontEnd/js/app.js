@@ -56,7 +56,7 @@ myApp.controller('reservarVehiculosController', function ($scope, $http) {
             'FechaHoraRetiro': fechaRetiro,
             'LugarDevolucion': lugarDevolucionSelected.Nombre,
             'LugarRetiro': lugarRetiroSelected.Nombre,
-            'VehiculoPorCiudadId': vehiculo,
+            'VehiculoPorCiudadId': vehiculoSelected.VehiculoCiudadId,
             'TotalReserva': totalReserva
         };
         console.log(reservaJson);
