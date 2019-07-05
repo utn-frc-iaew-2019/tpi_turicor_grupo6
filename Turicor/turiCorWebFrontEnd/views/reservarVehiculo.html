@@ -49,93 +49,121 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputFechaRetiro">Fecha de Retiro</label>
-                    <input type="datetime" class="form-control" id="inputFechaRetiro" placeholder="Dia/Mes/Año" ng-model="fechaRetiro">
+                    <input type="text" class="form-control" id="inputFechaRetiro" placeholder="AAAA-MM-DD" ng-model="fechaRetiro">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputoFechaDevolucion">Fecha Devolucion</label>
-                    <input type="datetime" class="form-control" id="inputFechaDevolucion" placeholder="Dia/Mes/Año" ng-model="fechaDevolucion">
+                    <input type="text" class="form-control" id="inputFechaDevolucion" placeholder="AAAA-MM-DD" ng-model="fechaDevolucion">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputLugarRetiro">Lugar Retiro</label>
-                    <select id="inputLugarRetiro" class="form-control" ng-model="lugarRetiroSelected" ng-options="lugar.Nombre for lugar in lugares">
-                    </select>
+                    <select id="inputLugarRetiro" class="form-control" ng-model="lugarRetiroSelected" ng-options="lugar.Nombre for lugar in lugares"></select>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputLugarDevolucion">Lugar Devolución</label>
-                    <select id="inputLugarDevolucion" class="form-control" ng-model="lugarDevolucionSelected" ng-options="lugar.Nombre for lugar in lugares">
+                    <select id="inputLugarDevolucion" class="form-control" ng-model="lugarDevolucionSelected" ng-options="lugar.Nombre for lugar in lugares"></select>
+                </div>
+            </div>
+            <div class="form-row">
+
+                <div class="form-group col-md-4">
+                    <label for="username">Nombre(*)</label>
+                    <input type="text" class="form-control" id="username" ng-model="userName">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="userape">Apellido(*)</label>
+                    <input type="text" class="form-control" id="userape" ng-model="userApe">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="userdni">DNI(*)</label>
+                    <input type="text" class="form-control" id="userdni" ng-model="userDni">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="vendor">Vendedor</label>
+                    <select id="vendor" class="form-control" ng-model="vendorSelected">
+                        <option selected ng-value="1">Lionel Messi</option>
+                        <option ng-value="2">Roger Federer</option>
+                        <option ng-value="3">Michael Phelps</option>
                     </select>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="inputCliente">Cliente</label>
-                <select id="inputCliente" class="form-control">
-                    <option selected>El Pulga Rodriguez</option>
-                    <option>Pablito Lescano</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="inputVendedor">Vendedor</label>
-                <select id="inputVendedor" class="form-control">
-                    <option selected>Vendedor 1</option>
-                    <option>Vendedor 2</option>
-                </select>
-            </div>
-
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputPais">Pais</label>
-                    <select id="inputState" class="form-control" ng-model="paisSelected" ng-options="pais.Nombre for pais in paises" ng-change="buscarCiudades(paisSelected.Id)">
-                    </select>
+
+                    <select id="inputState" class="form-control" ng-model="paisSelected" ng-options="pais.Nombre for pais in paises" ng-change="buscarCiudades(paisSelected.Id)"></select>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputCiudad">Ciudad</label>
-                    <select id="inputState" class="form-control" ng-model="ciudadSelected" ng-options="ciudad.Nombre for ciudad in ciudadesPais">
-                    </select>
+                    <select id="inputState" class="form-control" ng-model="ciudadSelected" ng-options="ciudad.Nombre for ciudad in ciudadesPais"></select>
                 </div>
             </div>
             <br />
+            <label>Response: {{msg}}</label>
+            <br />
+            <label>Yeison: {{yeison}}</label>
+            <br />
+            <label>Vehiculo Selecc: {{vehiculoSelected}}</label>
+            <br />
+            <label>Pais: {{paisSelected.Id}}</label>
+            <br />
+            <label>Ciudad {{ciudadSelected.Id}}</label>
+            <br />
+            <label>Vendor: {{vendorSelected}}</label>
+            <br />
+            <label>Lugar Ret: {{lugarRetiroSelected.Nombre}}</label>
+            <br />
+            <label>Lugar Dev: {{lugarDevolucionSelected.Nombre}}</label>
+
             <div class="form-group">
                 <button type="submit" class="btn btn-primary" ng-click="buscarVehiculos(ciudadSelected.Id, fechaRetiro, fechaDevolucion)">Cargar Vehiculos Disponibles</button> <br />
-          
-                <label for="inputVehiculo">Vehiculo</label>
+
+                <br />
+                <label>Listado de Vehículos Disponibles</label>
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#Id</th>
-                            <th scope="col">Marca</th>
-                            <th scope="col">Modelo</th>
-                            <th scope="col">Puntaje</th>
-                            <th scope="col">Puertas</th>
-                            <th scope="col">Disponibles</th>
-                            <th scope="col">Precio x dia</th>
-                            <th scope="col">Aire Acond</th>
-                            <th scope="col">Direccion</th>
-                            <th scope="col">Tipo de Cambio</th>
-                            <th scope="col">Seleccion</th>
+                            <th class="text-center">Marca</th>
+                            <th class="text-center">Modelo</th>
+                            <th class="text-center">Puntaje</th>
+                            <th class="text-center">Puertas</th>
+                            <th class="text-center">Disponibilidad</th>
+                            <th class="text-center">Precio/Día</th>
+                            <th class="text-center">A/C</th>
+                            <th class="text-center">Dirección</th>
+                            <th class="text-center">Caja</th>
+                            <th class="text-center">Seleccion</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="vehiculo in vehiculos">
                             <td scope="row" 1> {{vehiculo.Id}}</td>
-                            <td>{{vehiculo.Marca}}</td>
-                            <td>{{vehiculo.Modelo}}</td>
-                            <td>{{vehiculo.Puntaje}}</td>
-                            <td>{{vehiculo.CantidadPuertas}}</td>
-                            <td>{{vehiculo.CantidadDisponible}}</td>
-                            <td>{{vehiculo.PrecioPorDia}}</td>
-                            <td>{{vehiculo.TieneAireAcon}}</td>
-                            <td>{{vehiculo.TieneDireccion}}</td>
-                            <td>{{vehiculo.TipoCambio}}</td>
-                            <td>
-                                <input type="radio" name="optradio" value="{{vehiculo}}">
+                            <td class="text-center">{{vehiculo.Marca | uppercase}}</td>
+                            <td class="text-center">{{vehiculo.Modelo | uppercase}}</td>
+                            <td class="text-center">{{vehiculo.Puntaje}}</td>
+                            <td class="text-center">{{vehiculo.CantidadPuertas}}</td>
+                            <td class="text-center">{{vehiculo.CantidadDisponible}}</td>
+                            <td class="text-center">{{(vehiculo.PrecioPorDia)*1.2 | currency:'$'}}</td>
+                            <td class="text-center">{{vehiculo.TieneAireAcon? 'SI' : 'NO'}}</td>
+                            <td class="text-center">{{vehiculo.TieneDireccion? 'SI' : 'NO'}}</td>
+                            <td class="text-center">{{vehiculo.TipoCambio=='A'? 'AUTOMATICA' : 'MANUAL'}}</td>
+                            <td class="text-center">
+                                <label><input type="radio" name="group" ng-model="vehiculoSelected" value="{{vehiculo}}" /></label>
                             </td>
                         </tr>
                     </tbody>
-                </table>    
+                </table>
             </div>
-            <button type="submit" class="btn btn-primary" ng-click="printVehiculo(vehiculo)">Reservar</button>
+            <button type="submit" class="btn btn-primary" ng-click="reservarVehiculo(fechaRetiro, fechaDevolucion, lugarRetiroSelected, lugarDevolucionSelected,
+                    userName, userApe, userDni, vendorSelected, paisSelected, ciudadSelected, vehiculoSelected)">
+                Reservar
+            </button>
+
         </form>
     </div>
 

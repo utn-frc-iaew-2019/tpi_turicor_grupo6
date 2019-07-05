@@ -13,11 +13,17 @@ using TuricorAPI.Models;
 
 namespace TuricorAPI.Controllers
 {
+
     public class ReservasController : ApiController
     {
+        //Genero instancia del modelo TuricorEntities (Cliente, Reserva, Vendedor)
         private TuricorEntities db = new TuricorEntities();
 
+        //APIs de MODELO BD PROPIO
+
         // GET: api/Reservas
+
+        //public IQueryable<Reserva> GetReservasLocales()
         public IQueryable<Reserva> GetReservas()
         {
             return db.Reservas;
@@ -38,6 +44,7 @@ namespace TuricorAPI.Controllers
 
         // GET: api/Reservas/5
 
+        //public ServiceReferenceReservaVehiculos.ReservaEntity GetReservasSoap(string codigoReserva)
         public ServiceReferenceReservaVehiculos.ReservaEntity GetReserva(string codigoReserva)
         {
             var datosReserva = new DatosReserva();
@@ -93,18 +100,27 @@ namespace TuricorAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        //REAL POST
         // POST: api/Reservas
         [ResponseType(typeof(Reserva))]
+        //public IHttpActionResult PostReserva(ServiceReferenceReservaVehiculos.ReservaEntity reserva, int idCiudad, int idPais, int idVendedor)
         public IHttpActionResult PostReserva(ServiceReferenceReservaVehiculos.ReservaEntity reserva, int idCiudad, int idPais, int idVendedor)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
             var datosReserva = new DatosReserva();
+            //Copio los datos del parametro "reserva" en un objeto ReservaSOAP
+            //Debo generar objeto JavaScript con esos parámetros en ReservaSOAP
             var reservaSOAP = new ReservaSOAP(reserva);
+
+            //Creo la reserva en el Servicio SOAP y obtengo la respuesta actualizada en formato ReservaEntity, ya con parametros que agrega el mismo post
+            //como ser codigo de reserva y fecha de reserva.  
             ServiceReferenceReservaVehiculos.ReservaEntity reservaCreada = datosReserva.reservarVehiculo(reservaSOAP);
 
+            //Ya con una ReservaEntity ReservaSOAP en entidad de mi modelo Reserva
             var reservaNueva = new Reserva();
             if (this.ClienteExistsByDNI(int.Parse(reserva.NroDocumentoCliente)))
             {
@@ -127,8 +143,11 @@ namespace TuricorAPI.Controllers
             reservaNueva.IdCliente = int.Parse(reserva.NroDocumentoCliente);
             reservaNueva.IdPais = idPais;
             reservaNueva.IdVehiculoCiudad = reservaCreada.VehiculoPorCiudadId;
+            //no se lo pasa reservaCreada
             reservaNueva.IdVendedor = idVendedor;
-            reservaNueva.PrecioVenta = reserva.TotalReserva * (decimal) 1.2;
+            //lo toma del parametro original
+            reservaNueva.PrecioVenta = Convert.ToDecimal(reserva.FechaHoraDevolucion - reserva.FechaHoraRetiro) * reservaNueva.Costo * (decimal) 1.2;
+            //obtiene nombre del vendedor
             reservaNueva.Vendedor = GetVendedor(idVendedor);
 
 
@@ -143,11 +162,11 @@ namespace TuricorAPI.Controllers
             catch (DbUpdateException)
            
             {
-<<<<<<< HEAD
+
                 if (ReservaExists(reserva.Id.ToString()))
-=======
+
                 if (ReservaExists(reserva.CodigoReserva))
->>>>>>> 54b27c3bcc656d73c62c84ea4c41819237e7cac7
+
                 {
                     return Conflict();
                 }
@@ -159,6 +178,7 @@ namespace TuricorAPI.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = reserva.Id }, reserva);
         }
+
 
         protected override void Dispose(bool disposing)
         {

@@ -10,7 +10,7 @@ namespace TuricorAPI.Controllers
 {
     public class PaisesController : ApiController
     {
-        // GET: api/Paises
+        // GET: api/paises
         public ServiceReferenceReservaVehiculos.PaisEntity[] Get()
         {
             var datosPaises = new DatosPaises();
