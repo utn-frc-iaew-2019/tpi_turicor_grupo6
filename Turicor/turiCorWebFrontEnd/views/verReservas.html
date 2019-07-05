@@ -13,7 +13,7 @@
     <meta charset="utf-8" />
     <title></title>
 </head>
-<body ng-app="myApp" ng-controller="consultaReservasView">
+<body ng-app="myApp" ng-controller="verReservas">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="home.html">Turicor</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,33 +42,52 @@
             </ul>
         </div>
     </nav>
+
     <h1>Consultar reservas</h1>
     <br />
-        <table class="table">
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="inputFechaRetiro">Fecha Desde</label>
+            <input type="text" class="form-control" id="inputCliente" placeholder="AAAA-MM-DD" ng-model="fechaDesde">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputFechaRetiro">Fecha Hasta</label>
+            <input type="text" class="form-control" id="inputCliente" placeholder="AAAA-MM-DD" ng-model="fechaHasta">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <button type="submit" class="btn btn-primary" ng-click="pressed = true">Cargar Vehiculos Disponibles</button> <br />
+    </div>
+    <div class="form-row">
+        <br />
+    </div>
+    <div class="form-row">
+        <table class="table" ng-show="pressed">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">#Id</th>
-                    <th scope="col">Cliente</th>
-                    <th scope="col">Fecha Devolucion</th>
-                    <th scope="col">Fecha Retiro</th>
-                    <th scope="col">IdVehiculoCiudad</th>
-                    <th scope="col">Lugar Devolucion</th>
-                    <th scope="col">Lugar Retiro</th>
-                    <th scope="col">DNI Cliente</th>
+                    <th class="text-center">Cliente</th>
+                    <th class="text-center">DNI</th>
+                    <th class="text-center">Retiro</th>
+                    <th class="text-center">Lugar</th>
+                    <th class="text-center">Devolución</th>
+                    <th class="text-center">Lugar</th>
+                    <th class="text-center">ID Veh/Ciud</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="cliente in clientes">
-                    <th scope="row">{{reserva.Id}}</th>
-                    <td>{{reserva.ApellidoNombreCliente}}</td>
-                    <td>{{reserva.fechaDevolucion}}</td>
-                    <td>{{reserva.fechaRetiro}}</td>
-                    <td>{{reserva.VehicuPorCiudadId.Vechiculo.Id}}</td>
-                    <td>{{reserva.LugarDevolucion}}</td>
-                    <td>{{reserva.LugarRetiro}}</td>
-                    <td>{{reserva.NroDocumentoCliente}}</td>
+                <tr ng-repeat="rva in reservas">
+                    <td class="text-center">{{rva.Cliente}}</td>
+                    <td class="text-center">{{rva.Dni}}</td>
+                    <td class="text-center">{{rva.FechaRetiro}}</td>
+                    <td class="text-center">{{rva.LugarRetiro}}</td>
+                    <td class="text-center">{{rva.FechaDev}}</td>
+                    <td class="text-center">{{rva.LugarDev}}</td>
+                    <td class="text-center">{{rva.IdVehCiud}}</td>
                 </tr>
             </tbody>
         </table>
+    </div>
 </body>
 </html>

@@ -5,9 +5,12 @@ myApp.controller('reservarVehiculosController', function ($scope, $http) {
     $scope.ciudadesPais = [];
     $scope.lugares = [{ 'Id': '1', 'Nombre': 'Aeropuerto' }, { 'Id': '2', 'Nombre': 'Terminal' }, { 'Id': '3', 'Nombre': 'Hotel' }];
     $scope.vehiculos = [];
+    $scope.vehSelected = [];
+    $scope.json = [];
+    $scope.params = [];
     $scope.msg = "Naranja...";
     $scope.vehiculoSelected = {};
-    $scope.vendedores = [{ 'Id': '1', 'Nombre': 'Gonzalo' }, { 'Id': '2', 'Nombre': 'Roberto' }, { 'Id': '3', 'Nombre': 'Roman'}];
+    $scope.vendedores = [{ 'Id': '1', 'Nombre': 'Gonzalo' }, { 'Id': '2', 'Nombre': 'Roberto' }, { 'Id': '3', 'Nombre': 'Roman' }];
 
     $http({
         method: 'GET',
@@ -41,10 +44,13 @@ myApp.controller('reservarVehiculosController', function ($scope, $http) {
     };
 
     $scope.reservarVehiculo = function (fechaRetiro, fechaDevolucion, lugarRetiroSelected, lugarDevolucionSelected, userName, userApe, userDni,
-        vendedorSelected, paisSelected, ciudadSelected, vehiculoSelected) {
-        var fecha1 = moment(fechaRetiro);
-        var fecha2 = moment(fechaDevolucion);
-        var dif = fecha2.diff(fecha1)
+        vendorSelected, paisSelected, ciudadSelected, vehiculoSelected) {
+        $scope.vehSelected = vehiculoSelected;
+        let fecha1 = new Date(fechaRetiro);
+        let fecha2 = new Date(fechaDevolucion);
+        let difTime = fecha2.getTime() - fecha1.getTime();
+        var dif = Math.round(difTime / (1000 * 60 * 60 * 24));
+
         var totalReserva = dif * vehiculoSelected.PrecioPorDia * 1.20;
         var userNombre = userApe + ', ' + userName;
 
@@ -59,25 +65,57 @@ myApp.controller('reservarVehiculosController', function ($scope, $http) {
             'VehiculoPorCiudadId': vehiculoSelected.VehiculoCiudadId,
             'TotalReserva': totalReserva
         };
-        console.log(reservaJson);
+
+        $scope.json = reservaJson;
+
         var idCiudad = ciudadSelected.Id;
         var idPais = paisSelected.Id;
-        var idVendedor = vendedorSelected.Id;
+        var idVendedor = vendorSelected;
+
+        var params = {
+            'idCiudad': idCiudad,
+            'idPais': idPais,
+            'idVendedor': idVendedor
+        };
+
+        $scope.params = params;
+
+        window.alert("Su reserva se ha efectuado correctamente...");
+
         $http.post('http://localhost:50246/api/reservas?idCiudad=' + idCiudad + '&idPais=' + idPais + '&idVendedor=' + idVendedor, reservaJson);
-    }
+    };
 });
 
-myApp.controller('consultaReservasView', function ($scope, $http) {
-    $scope.reservas = [];
-    $http({
-        method: 'GET',
-        url: 'http://localhost:50246/api/reservas',
-        Headers: {
-            'content-type': 'application/json; charset=utf-8'
+myApp.controller('buscarReservas', function ($scope, $http) {
+    $scope.pressed = false;
+
+    $scope.apenom = "Guido Herrera";
+
+    $scope.reserves = [
+        { 'Cliente': 'Guido Herrera', 'Dni': '37450231', 'FechaRetiro': '2017-05-01', 'LugarRetiro': 'Aeropuerto', 'FechaDev': '2017-05-06', 'LugarDev': 'Terminal', 'IdVehCiud': '17' },
+        { 'Cliente': 'Guido Herrera', 'Dni': '37450231', 'FechaRetiro': '2017-05-15', 'LugarRetiro': 'Aeropuerto', 'FechaDev': '2017-06-01', 'LugarDev': 'Hotel', 'IdVehCiud': '58' },
+        { 'Cliente': 'Guido Herrera', 'Dni': '37450231', 'FechaRetiro': '2017-06-01', 'LugarRetiro': 'Terminal', 'FechaDev': '2017-06-08', 'LugarDev': 'Aeropuerto', 'IdVehCiud': '10' }
+    ];
+
+    var dni = $scope.userDni;
+
+    $scope.reservarVehiculo = function (dni) {
+        for (r in reserves) {
+            if (r.Dni === dni) {
+                $scope.apenom = r.Cliente;
+            }
         }
-    }).then(function (response) {
-        $scope.reservas = response.data.$values;
-    });
-    }
+    };
+}
 );
 
+myApp.controller('verReservas', function ($scope, $http) {
+    $scope.pressed = false;
+    $scope.reservas = [
+        { 'Cliente': 'Guido Herrera', 'Dni': '37450231', 'FechaRetiro': '2017-05-01', 'LugarRetiro': 'Aeropuerto', 'FechaDev': '2017-05-06', 'LugarDev': 'Terminal', 'IdVehCiud': '17' },
+        { 'Cliente': 'Guido Herrera', 'Dni': '37450231', 'FechaRetiro': '2017-05-15', 'LugarRetiro': 'Aeropuerto', 'FechaDev': '2017-06-01', 'LugarDev': 'Hotel', 'IdVehCiud': '58' },
+        { 'Cliente': 'Guido Herrera', 'Dni': '37450231', 'FechaRetiro': '2017-06-01', 'LugarRetiro': 'Terminal', 'FechaDev': '2017-06-08', 'LugarDev': 'Aeropuerto', 'IdVehCiud': '10' }
+    ];
+
+}
+);

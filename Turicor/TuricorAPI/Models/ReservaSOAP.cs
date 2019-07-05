@@ -29,8 +29,9 @@ namespace TuricorAPI.Models
             this.lugarRetiro = reserva.LugarRetiro;
             this.nroDocumentoCliente = reserva.NroDocumentoCliente;
             this.totalReserva = reserva.TotalReserva;
-            
-            //this.codigoReserva = reserva.CodigoReserva;
+            try { this.codigoReserva = reserva.CodigoReserva; }
+            catch (System.Exception) { }
+
         }
 
         public string getApellidoNombreCliente()
@@ -48,7 +49,7 @@ namespace TuricorAPI.Models
         public int getIdVehiculoCiudad()
         {
             return this.idVehiculoCiudad;
-        } 
+        }
         public string getLugarDevolucion()
         {
             return this.lugarDevolucion;
@@ -61,7 +62,7 @@ namespace TuricorAPI.Models
         {
             return this.nroDocumentoCliente;
         }
-        
+
         public string getCodigoReserva()
         {
             return this.codigoReserva;

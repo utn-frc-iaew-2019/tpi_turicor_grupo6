@@ -7,9 +7,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link href="../style/style.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
-    <script src="http://momentjs.com/downloads/moment.min.js"></script>
     <script src="../js/app.js"></script>
-
     <meta charset="utf-8" />
     <title></title>
 </head>
@@ -51,11 +49,11 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputFechaRetiro">Fecha de Retiro</label>
-                    <input type="datetime" class="form-control" id="inputFechaRetiro" placeholder="AAAA-MM-DD" ng-model="fechaRetiro">
+                    <input type="text" class="form-control" id="inputFechaRetiro" placeholder="AAAA-MM-DD" ng-model="fechaRetiro">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputoFechaDevolucion">Fecha Devolucion</label>
-                    <input type="datetime" class="form-control" id="inputFechaDevolucion" placeholder="AAAA-MM-DD" ng-model="fechaDevolucion">
+                    <input type="text" class="form-control" id="inputFechaDevolucion" placeholder="AAAA-MM-DD" ng-model="fechaDevolucion">
                 </div>
             </div>
             <div class="form-row">
@@ -86,7 +84,10 @@
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="vendor">Vendedor</label>
-                    <select id="vendor" class="form-control" ng-model="vendedorSelected" ng-options="vendedor.Nombre for vendedor in vendedores">
+                    <select id="vendor" class="form-control" ng-model="vendorSelected">
+                        <option selected value="1">Gonzalo</option>
+                        <option value="2">Alan Turing</option>
+                        <option value="3">Steve Jobs</option>
                     </select>
                 </div>
             </div>
@@ -102,18 +103,73 @@
                 </div>
             </div>
             <br />
+            <label>Lugar Ret: {{lugarRetiroSelected.Nombre}}</label>
+            <br />
+            <label>Lugar Dev: {{lugarDevolucionSelected.Nombre}}</label>
+            <br />
+            <label>Vendor: {{vendorSelected}}</label>
+            <br />
+            <label>Pais: {{paisSelected.Id}}</label>
+            <br />
+            <label>Ciudad {{ciudadSelected.Id}}</label>
+            <br />
+            <br />
+
             <div class="form-group">
-                <button type="submit" class="btn btn-primary" ng-click="buscarVehiculos(ciudadSelected.Id, fechaRetiro, fechaDevolucion)">Cargar Vehiculos Disponibles</button> 
-                <br />
+                <button type="submit" class="btn btn-primary" ng-click="buscarVehiculos(ciudadSelected.Id, fechaRetiro, fechaDevolucion)">Cargar Vehiculos Disponibles</button> <br />
+
                 <br />
                 <label>Listado de Vehículos Disponibles</label>
-                <select id="inputState" class="form-control" ng-model="vehiculoSelected" ng-options="vehiculo.Marca + ', ' + vehiculo.Modelo for vehiculo in vehiculos"></select>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="text-center">Marca</th>
+                            <th class="text-center">Modelo</th>
+                            <th class="text-center">Puntaje</th>
+                            <th class="text-center">Puertas</th>
+                            <th class="text-center">Disponibilidad</th>
+                            <th class="text-center">Precio/Día</th>
+                            <th class="text-center">A/C</th>
+                            <th class="text-center">Dirección</th>
+                            <th class="text-center">Caja</th>
+                            <th class="text-center">Seleccion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="vehiculo in vehiculos">
+                            <td class="text-center">{{vehiculo.Marca | uppercase}}</td>
+                            <td class="text-center">{{vehiculo.Modelo | uppercase}}</td>
+                            <td class="text-center">{{vehiculo.Puntaje}}</td>
+                            <td class="text-center">{{vehiculo.CantidadPuertas}}</td>
+                            <td class="text-center">{{vehiculo.CantidadDisponible}}</td>
+                            <td class="text-center">{{(vehiculo.PrecioPorDia)*1.2 | currency:'$'}}</td>
+                            <td class="text-center">{{vehiculo.TieneAireAcon? 'SI' : 'NO'}}</td>
+                            <td class="text-center">{{vehiculo.TieneDireccion? 'SI' : 'NO'}}</td>
+                            <td class="text-center">{{vehiculo.TipoCambio=='A'? 'AUTOMATICA' : 'MANUAL'}}</td>
+                            <td class="text-center">
+                                <button type="submit" class="btn btn-primary" ng-click="reservarVehiculo(fechaRetiro, fechaDevolucion, lugarRetiroSelected, lugarDevolucionSelected,
+                                    userName, userApe, userDni, vendorSelected, paisSelected, ciudadSelected, vehiculo)">
+                                    Reservar
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
             </div>
-            <button type="submit" class="btn btn-primary" ng-click="reservarVehiculo(fechaRetiro, fechaDevolucion, lugarRetiroSelected, lugarDevolucionSelected,
-                userName, userApe, userDni, vendedorSelected, paisSelected, ciudadSelected, vehiculoSelected)">
-                Reservar
-            </button>
+            <div>
+                <label>Vehiculo Seleccionado: {{vehSelected}}</label>
+                <br />
+                <label>JSON: {{json}}</label>
+                <br />
+                <label>Additional Params: {{params}}</label>
+                <br />
+
+            </div>
+
         </form>
     </div>
+
+
 </body>
 </html>
