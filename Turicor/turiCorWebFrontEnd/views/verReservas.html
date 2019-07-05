@@ -42,17 +42,8 @@
             </ul>
         </div>
     </nav>
-
     <h1>Consultar reservas</h1>
     <br />
-
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="inputFechaRetiro">Fecha de Retiro</label>
-            <input type="text" class="form-control" id="inputCliente" placeholder="AAAA-MM-DD" ng-model="fechaRetiro">
-        </div>
-    </div>
-
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -67,26 +58,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-
+                <tr ng-repeat="cliente in clientes">
+                    <th scope="row">{{reserva.Id}}</th>
+                    <td>{{reserva.ApellidoNombreCliente}}</td>
+                    <td>{{reserva.fechaDevolucion}}</td>
+                    <td>{{reserva.fechaRetiro}}</td>
+                    <td>{{reserva.VehicuPorCiudadId.Vechiculo.Id}}</td>
+                    <td>{{reserva.LugarDevolucion}}</td>
+                    <td>{{reserva.LugarRetiro}}</td>
+                    <td>{{reserva.NroDocumentoCliente}}</td>
                 </tr>
             </tbody>
         </table>
