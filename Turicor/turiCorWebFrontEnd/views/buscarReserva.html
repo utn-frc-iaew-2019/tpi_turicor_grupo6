@@ -11,7 +11,7 @@
     <meta charset="utf-8" />
     <title></title>
 </head>
-<body ng-app="myApp">
+<body ng-app="myApp" ng-controller="consultaReservasView">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="index.html">Turicor</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,17 +41,18 @@
         </div>
     </nav>
 
-    <h1>Buscar Reserva</h1>
+    <h1>Mis Reservas</h1>
     <br />
     <form>
         <div class="form-group">
-            <label for="inputCliente">Cliente(*)</label>
-            <select id="inputCliente" class="form-control">
-                <option selected value=''></option>
-                <option>Marcelo Tinelli</option>
-                <option>Walter Bowman</option>
-            </select>
+            <label for="dniCliente">Bienvenido {{apenom}}</label>
+            <div class="form-group col-md-6">
+                <label for="dniCliente">DNI Cliente</label>
+                <input type="text" class="form-control" id="dniCliente" placeholder="Ingrese su DNI" ng-model="dniCliente">
+            </div>
         </div>
+        <button type="submit" class="btn btn-primary" ng-click="buscarReservas(ciudadSelected.Id, fechaRetiro, fechaDevolucion)">Cargar Vehiculos Disponibles</button> <br />
+
         <button type="submit" class="btn btn-primary">Buscar</button>
     </form>
     <br />

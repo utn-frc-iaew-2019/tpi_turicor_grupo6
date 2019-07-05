@@ -67,3 +67,39 @@ C:\Users\Usuario\Desktop\UTN\5to ano\IAEW\tpi_turicor_grupo6\Turicor\turiCorWebF
 C:\Users\Usuario\Desktop\UTN\5to ano\IAEW\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\obj\Debug\turiCorWebFrontEnd.csproj.CopyComplete
 C:\Users\Usuario\Desktop\UTN\5to ano\IAEW\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\obj\Debug\turiCorWebFrontEnd.dll
 C:\Users\Usuario\Desktop\UTN\5to ano\IAEW\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\obj\Debug\turiCorWebFrontEnd.pdb
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\csc.exe
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\csc.exe.config
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\csc.rsp
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\csi.exe
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\csi.rsp
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\System.AppContext.dll
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\vbc.exe
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\vbc.exe.config
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\vbc.rsp
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\VBCSCompiler.exe
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\turiCorWebFrontEnd.dll.config
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\turiCorWebFrontEnd.dll
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\turiCorWebFrontEnd.pdb
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\obj\Debug\turiCorWebFrontEnd.csprojAssemblyReference.cache
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\obj\Debug\turiCorWebFrontEnd.csproj.CoreCompileInputs.cache
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\obj\Debug\turiCorWebFrontEnd.csproj.CopyComplete
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\obj\Debug\turiCorWebFrontEnd.dll
+C:\Users\Yazi\Desktop\iaewTp\tpi_turicor_grupo6\Turicor\turiCorWebFrontEnd\obj\Debug\turiCorWebFrontEnd.pdb

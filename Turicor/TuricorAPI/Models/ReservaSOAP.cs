@@ -16,6 +16,8 @@ namespace TuricorAPI.Models
         private string lugarRetiro;
         private string nroDocumentoCliente;
         private string codigoReserva;
+        private decimal totalReserva;
+
 
         public ReservaSOAP(ServiceReferenceReservaVehiculos.ReservaEntity reserva)
         {
@@ -26,7 +28,9 @@ namespace TuricorAPI.Models
             this.lugarDevolucion = reserva.LugarDevolucion;
             this.lugarRetiro = reserva.LugarRetiro;
             this.nroDocumentoCliente = reserva.NroDocumentoCliente;
-            this.codigoReserva = reserva.CodigoReserva;
+            this.totalReserva = reserva.TotalReserva;
+            
+            //this.codigoReserva = reserva.CodigoReserva;
         }
 
         public string getApellidoNombreCliente()

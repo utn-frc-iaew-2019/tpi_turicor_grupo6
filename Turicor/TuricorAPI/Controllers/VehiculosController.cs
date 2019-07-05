@@ -10,15 +10,11 @@ namespace TuricorAPI.Controllers
 {
     public class VehiculosController : ApiController
     {
-        // GET: api/Vehiculo/5
+        // GET: api/vehiculos/?idCiudad=&fechaRetiro=&fechaDevolucion=
         public ServiceReferenceReservaVehiculos.VehiculoModel[] Get(int idCiudad, string fechaRetiro, string fechaDevolucion)
         {
             var datosVehiculos = new DatosVehiculos();
             return datosVehiculos.consultarVehiculosDisponibles(idCiudad, DateTime.Parse(fechaRetiro), DateTime.Parse(fechaDevolucion));
         }
-
-       
-
-
     }
 }

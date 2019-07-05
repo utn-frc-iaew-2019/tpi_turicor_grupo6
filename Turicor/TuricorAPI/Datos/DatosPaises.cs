@@ -19,7 +19,9 @@ namespace TuricorAPI.Datos
             cliente = new ServiceReferenceReservaVehiculos.WCFReservaVehiculosClient();
             credenciales.UserName = usuario;
             credenciales.Password = contraseña;
+            
         }
+
 
         public ServiceReferenceReservaVehiculos.PaisEntity[] consultarPaises()
         {

@@ -28,6 +28,7 @@ namespace TuricorAPI.Datos
             request.FechaHoraDevolucion = fechaHoraDevolucion;
 
             var respuesta = cliente.ConsultarVehiculosDisponibles(credenciales, request);
+
             return respuesta.VehiculosEncontrados;
         }
     }
