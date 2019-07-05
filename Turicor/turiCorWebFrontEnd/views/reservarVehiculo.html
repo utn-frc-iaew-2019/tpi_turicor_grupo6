@@ -51,11 +51,11 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputFechaRetiro">Fecha de Retiro</label>
-                    <input type="date" class="form-control" id="inputFechaRetiro" placeholder="AAAA-MM-DD" ng-model="fechaRetiro">
+                    <input type="datetime" class="form-control" id="inputFechaRetiro" placeholder="AAAA-MM-DD" ng-model="fechaRetiro">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputoFechaDevolucion">Fecha Devolucion</label>
-                    <input type="date" class="form-control" id="inputFechaDevolucion" placeholder="AAAA-MM-DD" ng-model="fechaDevolucion">
+                    <input type="datetime" class="form-control" id="inputFechaDevolucion" placeholder="AAAA-MM-DD" ng-model="fechaDevolucion">
                 </div>
             </div>
             <div class="form-row">
@@ -86,7 +86,7 @@
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="vendor">Vendedor</label>
-                    <select id="vendor" class="form-control" ng-model="vendedorSelected" ng-open="vendedor.Nombre for vendedor in vendedores">
+                    <select id="vendor" class="form-control" ng-model="vendedorSelected" ng-options="vendedor.Nombre for vendedor in vendedores">
                     </select>
                 </div>
             </div>
