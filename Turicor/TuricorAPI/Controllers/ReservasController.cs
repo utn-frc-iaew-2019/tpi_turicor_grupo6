@@ -7,13 +7,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using TuricorAPI.Datos;
 using TuricorAPI.Models;
 
 namespace TuricorAPI.Controllers
 {
-
+    [EnableCors("*", "*", "*")]
     public class ReservasController : ApiController
     {
         //Genero instancia del modelo TuricorEntities (Cliente, Reserva, Vendedor)
