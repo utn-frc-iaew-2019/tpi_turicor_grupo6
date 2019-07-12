@@ -30,24 +30,27 @@ namespace TuricorAPI.Controllers
             return db.Reservas;
         }
 
-        // GET: api/Reservas/5
-        public IQueryable<Reserva> GetReservasByDNI(int dni)
+        // GET: api/Reservas/?dni=&idVendedor=
+        public IQueryable<Reserva> GetReservas(int dni, int idVendedor)
         {
-            if (db.Clientes.Where(n => n.NroDocumento == dni).Count() > 0)
+            if (dni != null)
             {
-                int idCliente = db.Clientes.Where(n => n.NroDocumento == dni).First().Id;
-                return db.Reservas.Where(r => r.IdCliente == idCliente);
+                if (db.Clientes.Where(n => n.NroDocumento == dni).Count() > 0)
+                {
+                    int idCliente = db.Clientes.Where(n => n.NroDocumento == dni).First().Id;
+                    return db.Reservas.Where(r => r.IdCliente == idCliente);
+                }
+                else { return null; };
             }
-            else { return null; };
-        }
-
-        public IQueryable<Reserva> GetReservasByIdVendedor(int idVendedor)
-        {
+            else if (idVendedor != null)
+            {
             if (db.Vendedors.Where(n => n.Id == idVendedor).Count() > 0)
             {
                 return db.Reservas.Where(r => r.IdVendedor == idVendedor);
             }
             else { return null; };
+        }
+            else { return null; }
         }
 
 
