@@ -33,7 +33,7 @@ namespace TuricorAPI.Controllers
         // GET: api/Reservas/?dni=&idVendedor=
         public IQueryable<Reserva> GetReservas(int dni, int idVendedor)
         {
-            if (dni != null)
+            if (dni != -1)
             {
                 if (db.Clientes.Where(n => n.NroDocumento == dni).Count() > 0)
                 {
@@ -42,7 +42,7 @@ namespace TuricorAPI.Controllers
                 }
                 else { return null; };
             }
-            else if (idVendedor != null)
+            else if (idVendedor != -1)
             {
             if (db.Vendedors.Where(n => n.Id == idVendedor).Count() > 0)
             {
