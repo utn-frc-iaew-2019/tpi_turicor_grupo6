@@ -84,7 +84,7 @@ namespace TuricorAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ReservaExists(reserva.CodigoReserva))
+                if (!ReservaExistsByCodReserva(reserva.CodigoReserva))
                 {
                     return NotFound();
                 }
@@ -123,7 +123,7 @@ namespace TuricorAPI.Controllers
 
             //Ya con una ReservaEntity ReservaSOAP en entidad de mi modelo Reserva
             var reservaNueva = new Reserva();
-            if (this.GetCliente((int.Parse(reserva.NroDocumentoCliente))) != null)
+            if (this.ClienteExistsByDNI(int.Parse(reserva.NroDocumentoCliente)))
             {
                 reservaNueva.Cliente = this.GetCliente(int.Parse(reserva.NroDocumentoCliente));
             }
@@ -137,17 +137,17 @@ namespace TuricorAPI.Controllers
             
 
             reservaNueva.CodigoReserva = reservaCreada.CodigoReserva;
-            reservaNueva.Costo = reserva.TotalReserva;
+            reservaNueva.Costo = reserva.TotalReserva / (decimal) 1.2;
             reservaNueva.Estado = 1;
             reservaNueva.FechaReserva = reservaCreada.FechaReserva;
             reservaNueva.IdCiudad = idCiudad;
-            reservaNueva.IdCliente = int.Parse(reserva.NroDocumentoCliente);
+            reservaNueva.IdCliente = this.GetCliente(int.Parse(reserva.NroDocumentoCliente)).Id;
             reservaNueva.IdPais = idPais;
             reservaNueva.IdVehiculoCiudad = reservaCreada.VehiculoPorCiudadId;
             //no se lo pasa reservaCreada
             reservaNueva.IdVendedor = idVendedor;
             //lo toma del parametro original
-            reservaNueva.PrecioVenta = Convert.ToDecimal(reserva.FechaHoraDevolucion - reserva.FechaHoraRetiro) * reservaNueva.Costo * (decimal) 1.2;
+            reservaNueva.PrecioVenta = reserva.TotalReserva;
             //obtiene nombre del vendedor
             reservaNueva.Vendedor = GetVendedor(idVendedor);
 
@@ -164,9 +164,7 @@ namespace TuricorAPI.Controllers
            
             {
 
-                if (ReservaExists(reserva.Id.ToString()))
-
-                if (ReservaExists(reserva.CodigoReserva))
+                if (ReservaExistsByCodReserva(reserva.CodigoReserva))
 
                 {
                     return Conflict();
@@ -190,11 +188,16 @@ namespace TuricorAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ReservaExists(string codigoReserva)
+
+        private bool ReservaExistsByCodReserva(string codigoReserva)
         {
-            return db.Reservas.Find(codigoReserva) != null;
+            return db.Reservas.Where(n => n.CodigoReserva == codigoReserva).Count() > 0;
         }
 
+        private bool ClienteExistsByDNI(int dni)
+        {
+            return db.Clientes.Where(n => n.NroDocumento == dni).Count() > 0;
+        }
 
         private Cliente GetCliente(int dni)
         {
