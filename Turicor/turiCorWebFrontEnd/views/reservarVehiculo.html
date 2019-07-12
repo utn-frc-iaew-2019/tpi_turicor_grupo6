@@ -14,7 +14,7 @@
 
 <body ng-app="myApp" ng-controller="reservarVehiculosController">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="index.html">Turicor</a>
+        <a class="navbar-brand" href="index.html">Turicor Grupo N°6</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -22,27 +22,28 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="vehiculosDisp.html">Vehiculos Disponibles</a>
+                    <a class="nav-link" href="vehiculosDisp.html">Consulta de Vehiculos</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Reserva
+                        Reservas
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="reservarVehiculo.html">Reservar Vehiculo</a>
-                        <a class="dropdown-item" href="verReservas.html">Reservas realizadas</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="buscarReserva.html">Ver Reservas</a>
+                        <a class="dropdown-item" href="reservarVehiculo.html">Efectuar Reserva</a>
+                        <a class="dropdown-item" href="verReservas.html">Consultar Reservas</a>
+                        <a class="dropdown-item" href="buscarReserva.html">Mis Reservas</a>
                     </div>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <h1>Reservar vehiculo</h1>
+    <br />
+    <h2>Reserve un Vehículo</h2>
+    <br />
 
     <div>
         <form>
@@ -86,8 +87,10 @@
                     <label for="vendor">Vendedor</label>
                     <select id="vendor" class="form-control" ng-model="vendorSelected">
                         <option selected value="1">Gonzalo</option>
-                        <option value="2">Alan Turing</option>
-                        <option value="3">Steve Jobs</option>
+                        <option value="2">Facundo Mallia</option>
+                        <option value="3">Gustavo Gomez</option>
+                        <option value="4">Juan Ochoa</option>
+                        <option value="5">Carlos Paez</option>
                     </select>
                 </div>
             </div>
@@ -102,6 +105,7 @@
                     <select id="inputState" class="form-control" ng-model="ciudadSelected" ng-options="ciudad.Nombre for ciudad in ciudadesPais"></select>
                 </div>
             </div>
+
             <br />
             <label>Lugar Ret: {{lugarRetiroSelected.Nombre}}</label>
             <br />
@@ -116,7 +120,7 @@
             <br />
 
             <div class="form-group">
-                <button type="submit" class="btn btn-primary" ng-click="buscarVehiculos(ciudadSelected.Id, fechaRetiro, fechaDevolucion)">Cargar Vehiculos Disponibles</button> <br />
+                <button type="submit" class="btn btn-primary" ng-click="buscarVehiculos(ciudadSelected.Id, fechaRetiro, fechaDevolucion)">Listar Vehículos</button> <br />
 
                 <br />
                 <label>Listado de Vehículos Disponibles</label>

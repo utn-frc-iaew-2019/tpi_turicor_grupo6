@@ -157,6 +157,7 @@ namespace TuricorAPI.Controllers
                 clienteNuevo.Nombre = reserva.ApellidoNombreCliente.Split(',')[1];
                 clienteNuevo.NroDocumento = int.Parse(reserva.NroDocumentoCliente);
                 db.Clientes.Add(clienteNuevo);
+                db.SaveChanges();
             }
             
 

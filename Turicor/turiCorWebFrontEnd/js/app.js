@@ -87,35 +87,82 @@ myApp.controller('reservarVehiculosController', function ($scope, $http) {
 });
 
 myApp.controller('buscarReservas', function ($scope, $http) {
-    $scope.pressed = false;
 
-    $scope.apenom = "Guido Herrera";
+    //api/Reservas/?codigoReserva=6XEYK
 
-    $scope.reserves = [
-        { 'Cliente': 'Guido Herrera', 'Dni': '37450231', 'FechaRetiro': '2017-05-01', 'LugarRetiro': 'Aeropuerto', 'FechaDev': '2017-05-06', 'LugarDev': 'Terminal', 'IdVehCiud': '17' },
-        { 'Cliente': 'Guido Herrera', 'Dni': '37450231', 'FechaRetiro': '2017-05-15', 'LugarRetiro': 'Aeropuerto', 'FechaDev': '2017-06-01', 'LugarDev': 'Hotel', 'IdVehCiud': '58' },
-        { 'Cliente': 'Guido Herrera', 'Dni': '37450231', 'FechaRetiro': '2017-06-01', 'LugarRetiro': 'Terminal', 'FechaDev': '2017-06-08', 'LugarDev': 'Aeropuerto', 'IdVehCiud': '10' }
-    ];
+    $scope.reservas = [];
 
-    var dni = $scope.userDni;
+    $scope.establecerCodigo = function (codigoReserva) {
+        $scope.codigo = codigoReserva;
 
-    $scope.reservarVehiculo = function (dni) {
-        for (r in reserves) {
-            if (r.Dni === dni) {
-                $scope.apenom = r.Cliente;
+        var length = $scope.reservas.length;
+        for (i = 0; i < length; i++) {
+            if ($scope.reservas[i].CodigoReserva === $scope.codigo) {
+                $scope.theReserve = $scope.reservas[i];
             }
         }
+
+        /*for (var rva in $scope.reservas) {
+            if (rva.CodigoReserva == $scope.codigo) {
+                $scope.theReserve = rva;
+            }
+        }*/
     };
+
+
+
+    /*$scope.obtenerReservas = function (codigoReserva) {
+        $http({
+            method: 'GET',
+            url: 'http://localhost:50246/api/reservas' + '?codigoReserva=' + codigoReserva,
+            Headers: {
+                'content-type': 'application/json; charset=utf-8'
+            }
+        }).then(function (response) {
+            $scope.rva = response.data.$values;
+            });
+        //$scope.codigoPiola = $scope.reservas.CodigoReserva;
+    };*/
+
+    $http({
+        method: 'GET',
+        url: 'http://localhost:50246/api/reservas',
+        Headers: {
+            'content-type': 'application/json; charset=utf-8'
+        }
+    }).then(function (response) {
+        $scope.reservas = response.data.$values;
+    });
+
+
+
 }
 );
 
 myApp.controller('verReservas', function ($scope, $http) {
     $scope.pressed = false;
-    $scope.reservas = [
+    $scope.reservas = [];
+
+    $http({
+        method: 'GET',
+        url: 'http://localhost:50246/api/reservas',
+        Headers: {
+            'content-type': 'application/json; charset=utf-8'
+        }
+    }).then(function (response) {
+        $scope.reservas = response.data.$values;
+    });
+
+}
+);
+
+    /*
+     $scope.reservas = [
         { 'Cliente': 'Guido Herrera', 'Dni': '37450231', 'FechaRetiro': '2017-05-01', 'LugarRetiro': 'Aeropuerto', 'FechaDev': '2017-05-06', 'LugarDev': 'Terminal', 'IdVehCiud': '17' },
         { 'Cliente': 'Guido Herrera', 'Dni': '37450231', 'FechaRetiro': '2017-05-15', 'LugarRetiro': 'Aeropuerto', 'FechaDev': '2017-06-01', 'LugarDev': 'Hotel', 'IdVehCiud': '58' },
         { 'Cliente': 'Guido Herrera', 'Dni': '37450231', 'FechaRetiro': '2017-06-01', 'LugarRetiro': 'Terminal', 'FechaDev': '2017-06-08', 'LugarDev': 'Aeropuerto', 'IdVehCiud': '10' }
     ];
+    */
 
-}
-);
+
+    //api/Reservas/?dni=&idVendedor=

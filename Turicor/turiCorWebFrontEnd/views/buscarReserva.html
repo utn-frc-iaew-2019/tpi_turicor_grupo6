@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -13,7 +14,7 @@
 </head>
 <body ng-app="myApp" ng-controller="buscarReservas">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="index.html">Turicor</a>
+        <a class="navbar-brand" href="index.html">Turicor Grupo N°6</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -21,67 +22,72 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="vehiculosDisp.html">Vehiculos Disponibles</a>
+                    <a class="nav-link" href="vehiculosDisp.html">Consulta de Vehiculos</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Reserva
+                        Reservas
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="reservarVehiculo.html">Reservar Vehiculo</a>
-                        <a class="dropdown-item" href="verReservas.html">Reservas realizadas</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="buscarReserva.html">Ver Reservas</a>
+                        <a class="dropdown-item" href="reservarVehiculo.html">Efectuar Reserva</a>
+                        <a class="dropdown-item" href="verReservas.html">Consultar Reservas</a>
+                        <a class="dropdown-item" href="buscarReserva.html">Mis Reservas</a>
                     </div>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <h1>Mis Reservas</h1>
     <br />
+    <h2>Consulte sus reservas mediante Codigo de Reserva </h2>
+    <br />
+
     <form>
         <div class="form-row">
 
             <div class="form-group col-md-4">
-                <label for="dniCliente">Cliente</label>
-                <input type="text" class="form-control" id="dniCliente" placeholder="Ingrese DNI" ng-model="userDni">
+                <label for="dniCliente">Codigo Reserva</label>
+                <input type="text" class="form-control" id="codReserva" placeholder="Su código de reserva..." ng-model="codigoReserva">
             </div>
         </div>
 
         <div class="form-row">
-            <button type="submit" class="btn btn-primary" ng-click="pressed=true">Buscar</button> <br />
+            <button type="submit" class="btn btn-primary" ng-click="establecerCodigo(codigoReserva)">Consultar!</button> <br />
         </div>
+
+        <br />
 
         <div class="form-row">
-            <br />
-        </div>
-
-        <div class="form-row" ng-show="pressed">
-            <br />
-            <label>Bienvenido, {{apenom}}. Sus reservas a continuación...</label>
-            <br />
-
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
-                        <th class="text-center">ID Veh/Ciud</th>
-                        <th class="text-center">Fecha Retiro</th>
-                        <th class="text-center">Lugar</th>
-                        <th class="text-center">Fecha Devolución</th>
-                        <th class="text-center">Lugar</th>
+                        <th class="text-center">Codigo</th>
+                        <th class="text-center">Fecha Rva</th>
+                        <th class="text-center">Cliente</th>
+                        <th class="text-center">Vendor</th>
+                        <th class="text-center">Costo</th>
+                        <th class="text-center">Precio Vta</th>
+                        <th class="text-center">Id Veh/Ciud</th>
+                        <th class="text-center">Id Ciud</th>
+                        <th class="text-center">Id País</th>
+                        <th class="text-center">Estado</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="r in reserves">
-                        <td class="text-center">{{r.IdVehCiud}}</td>
-                        <td class="text-center">{{r.FechaRetiro}}</td>
-                        <td class="text-center">{{r.LugarRetiro}}</td>
-                        <td class="text-center">{{r.FechaDev}}</td>
-                        <td class="text-center">{{r.LugarDev}}</td>
+                    <tr>
+                        <td class="text-center">{{theReserve.CodigoReserva}}</td>
+                        <td class="text-center">{{theReserve.FechaReserva | date:'dd/MM/yyyy'}}</td>
+                        <td class="text-center">{{theReserve.Cliente.Apellido + ', ' + theReserve.Cliente.Nombre}}</td>
+                        <td class="text-center">{{theReserve.Vendedor.Nombre}}</td>
+                        <td class="text-center">{{theReserve.Costo | currency:'$'}}</td>
+                        <td class="text-center">{{theReserve.PrecioVenta | currency:'$'}}</td>
+                        <td class="text-center">{{theReserve.IdVehiculoCiudad}}</td>
+                        <td class="text-center">{{theReserve.IdCiudad}}</td>
+                        <td class="text-center">{{theReserve.IdPais}}</td>
+                        <td class="text-center">{{theReserve.Estado}}</td>
                     </tr>
                 </tbody>
             </table>

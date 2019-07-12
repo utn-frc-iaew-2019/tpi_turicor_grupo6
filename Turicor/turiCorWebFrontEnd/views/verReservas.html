@@ -15,7 +15,7 @@
 </head>
 <body ng-app="myApp" ng-controller="verReservas">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="home.html">Turicor</a>
+        <a class="navbar-brand" href="index.html">Turicor Grupo N°6</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -23,42 +23,31 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="home.html">Home</a>
+                    <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="vehiculosDisp.html">Vehiculos Disponibles <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="vehiculosDisp.html">Consulta de Vehiculos</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Reserva
+                        Reservas
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="reservarVehiculo.html">Reservar Vehiculo</a>
-                        <a class="dropdown-item" href="verReservas.html">Reservas realizadas</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="buscarReserva.html">Ver Reserva</a>
+                        <a class="dropdown-item" href="reservarVehiculo.html">Efectuar Reserva</a>
+                        <a class="dropdown-item" href="verReservas.html">Consultar Reservas</a>
+                        <a class="dropdown-item" href="buscarReserva.html">Mis Reservas</a>
                     </div>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <h1>Consultar reservas</h1>
+    <br />
+    <h2>Consulte totalidad de Reservas existentes</h2>
     <br />
 
     <div class="form-row">
-        <div class="form-group col-md-4">
-            <label for="inputFechaRetiro">Fecha Desde</label>
-            <input type="text" class="form-control" id="inputCliente" placeholder="AAAA-MM-DD" ng-model="fechaDesde">
-        </div>
-        <div class="form-group col-md-4">
-            <label for="inputFechaRetiro">Fecha Hasta</label>
-            <input type="text" class="form-control" id="inputCliente" placeholder="AAAA-MM-DD" ng-model="fechaHasta">
-        </div>
-    </div>
-
-    <div class="form-row">
-        <button type="submit" class="btn btn-primary" ng-click="pressed = true">Cargar Vehiculos Disponibles</button> <br />
+        <button type="submit" class="btn btn-primary" ng-click="pressed = true">Consultar!</button> <br />
     </div>
     <div class="form-row">
         <br />
@@ -67,24 +56,31 @@
         <table class="table" ng-show="pressed">
             <thead class="thead-dark">
                 <tr>
+                    <th class="text-center">Codigo</th>
+                    <th class="text-center">Fecha Rva</th>
                     <th class="text-center">Cliente</th>
-                    <th class="text-center">DNI</th>
-                    <th class="text-center">Retiro</th>
-                    <th class="text-center">Lugar</th>
-                    <th class="text-center">Devolución</th>
-                    <th class="text-center">Lugar</th>
-                    <th class="text-center">ID Veh/Ciud</th>
+                    <th class="text-center">Vendor</th>
+                    <th class="text-center">Costo</th>
+                    <th class="text-center">Precio Vta</th>
+                    <th class="text-center">Id Veh/Ciud</th>
+                    <th class="text-center">Id Ciud</th>
+                    <th class="text-center">Id País</th>
+                    <th class="text-center">Estado</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="rva in reservas">
-                    <td class="text-center">{{rva.Cliente}}</td>
-                    <td class="text-center">{{rva.Dni}}</td>
-                    <td class="text-center">{{rva.FechaRetiro}}</td>
-                    <td class="text-center">{{rva.LugarRetiro}}</td>
-                    <td class="text-center">{{rva.FechaDev}}</td>
-                    <td class="text-center">{{rva.LugarDev}}</td>
-                    <td class="text-center">{{rva.IdVehCiud}}</td>
+                    <td class="text-center">{{rva.CodigoReserva}}</td>
+                    <td class="text-center">{{rva.FechaReserva | date:'dd/MM/yyyy'}}</td>
+                    <td class="text-center">{{rva.Cliente.Apellido + ', ' + rva.Cliente.Nombre}}</td>
+                    <td class="text-center">{{rva.Vendedor.Nombre}}</td>
+                    <td class="text-center">{{rva.Costo | currency:'$'}}</td>
+                    <td class="text-center">{{rva.PrecioVenta | currency:'$'}}</td>
+                    <td class="text-center">{{rva.IdVehiculoCiudad}}</td>
+                    <td class="text-center">{{rva.IdCiudad}}</td>
+                    <td class="text-center">{{rva.IdPais}}</td>
+                    <td class="text-center">{{rva.Estado}}</td>
+
                 </tr>
             </tbody>
         </table>
