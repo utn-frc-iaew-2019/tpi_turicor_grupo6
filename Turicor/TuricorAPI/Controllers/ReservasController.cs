@@ -123,7 +123,7 @@ namespace TuricorAPI.Controllers
 
             //Ya con una ReservaEntity ReservaSOAP en entidad de mi modelo Reserva
             var reservaNueva = new Reserva();
-            if (this.ClienteExistsByDNI(int.Parse(reserva.NroDocumentoCliente)))
+            if (this.GetCliente((int.Parse(reserva.NroDocumentoCliente))) != null)
             {
                 reservaNueva.Cliente = this.GetCliente(int.Parse(reserva.NroDocumentoCliente));
             }
@@ -195,10 +195,6 @@ namespace TuricorAPI.Controllers
             return db.Reservas.Find(codigoReserva) != null;
         }
 
-        private bool ClienteExistsByDNI(int dni)
-        {
-            return db.Clientes.Where(n => n.NroDocumento == dni) != null;
-        }
 
         private Cliente GetCliente(int dni)
         {
